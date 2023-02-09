@@ -15,10 +15,10 @@ public class RestApiCalendarController {
 
     public RestApiCalendarController() {
         events.addAll(List.of(
-                new Event("23.05 Sleep"),
-                new Event("23.05 Eat"),
-                new Event("23.05 Drink"),
-                new Event("23.05 Dance")
+                new Event("23.05 Sleep", "Sasha"),
+                new Event("23.05 Eat", "Sasha"),
+                new Event("23.05 Drink", "Masha"),
+                new Event("23.05 Dance", "Vasya")
         ));
     }
 
@@ -35,11 +35,11 @@ public class RestApiCalendarController {
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<Event> putCoffee(@PathVariable String id,
-                                    @RequestBody Event event) {
+    ResponseEntity<Event> putEvent(@PathVariable String id,
+                                   @RequestBody Event event) {
         int eventIndex = -1;
         for (Event c : events) {
-            if (c.getId().equals(id)) {
+            if (c.getId() == Integer.parseInt(id)) {
                 eventIndex = events.indexOf(c);
                 events.set(eventIndex, event);
             }
@@ -51,6 +51,6 @@ public class RestApiCalendarController {
 
     @DeleteMapping("/{id}")
     void deleteEvent(@PathVariable String id) {
-        events.removeIf(c -> c.getId().equals(id));
+        events.removeIf(c -> c.getId() == Integer.parseInt(id));
     }
 }

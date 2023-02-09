@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Users")
 public class User {
@@ -24,11 +26,15 @@ public class User {
     @Column(name = "role")
     private String role;
 
-    public User(){
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private List<Event> contacts;
+
+    public User() {
 
     }
 
-    public User( String username, String password) {
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
